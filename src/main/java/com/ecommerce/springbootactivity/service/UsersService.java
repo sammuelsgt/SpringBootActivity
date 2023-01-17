@@ -5,6 +5,7 @@ import com.ecommerce.springbootactivity.dto.UsersDto;
 import com.ecommerce.springbootactivity.entity.Products;
 import com.ecommerce.springbootactivity.entity.Role;
 import com.ecommerce.springbootactivity.entity.Users;
+import com.ecommerce.springbootactivity.exception.BadRequestException;
 import com.ecommerce.springbootactivity.repository.RolesRepository;
 import com.ecommerce.springbootactivity.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,9 +48,10 @@ public class UsersService {
         return usersRepository.findByemail(email);
     }
 
-    public List<Users> findAll() {
-        return usersRepository.findAll();
+    public Users findUserById(int user_id) throws BadRequestException {
+        return usersRepository.findById(user_id).orElseThrow(() ->new BadRequestException("User cannot be found"));
     }
+
 
 
 }

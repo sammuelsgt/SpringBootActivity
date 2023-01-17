@@ -33,6 +33,8 @@ public class ProductsService {
         products.setProductDescription(productsDto.getProductDescription());
         products.setProductQuantity(productsDto.getProductQuantity());
         products.setProductPrice((productsDto.getProductPrice()));
+        products.setUserId((productsDto.getUserId()));
+
 
 
 

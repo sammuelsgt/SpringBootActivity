@@ -1,5 +1,6 @@
 package com.ecommerce.springbootactivity.controller;
 
+import com.ecommerce.springbootactivity.dto.ProductsDto;
 import com.ecommerce.springbootactivity.dto.UsersDto;
 import com.ecommerce.springbootactivity.entity.Users;
 import com.ecommerce.springbootactivity.service.UsersService;
@@ -23,8 +24,9 @@ public class UsersController {
     }
 
     @GetMapping("/home")
-    public String homePage(){
+    public String homePage(UsersDto usersDto, Model model){
 
+        model.addAttribute("user", usersService.findUserByEmail(usersDto.getEmail()));
         return "users/homepage";
 
     }
@@ -32,6 +34,11 @@ public class UsersController {
     @GetMapping("/login")
     public String login(){
         return "users/login";
+    }
+
+    @GetMapping("/logout")
+    public String logout(){
+        return "users/homepage";
     }
     @GetMapping("/register")
     public String showRegistrationForm(Model model){

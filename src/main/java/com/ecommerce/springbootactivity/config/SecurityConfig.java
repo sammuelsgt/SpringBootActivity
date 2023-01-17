@@ -32,18 +32,20 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http ) throws Exception {
         http.csrf().disable()
                 .authorizeHttpRequests((authorize) ->
-                        authorize.requestMatchers("/register/**").authenticated()
-                                .requestMatchers("/web/**").hasRole("BUYER")
-                                .requestMatchers("/users").authenticated()
+                        authorize.requestMatchers("/web/register/**").permitAll()
+                                .requestMatchers("/web/**").permitAll()
+                                .requestMatchers("/web/login").permitAll()
+                                .anyRequest().denyAll()
+
                 ).formLogin(
                         form -> form
                                 .loginPage("/web/login")
                                 .loginProcessingUrl("/web/login")
-                                .defaultSuccessUrl("/web/homepage")
+                                .defaultSuccessUrl("/web/home")
                                 .permitAll()
                 ).logout(
                         logout -> logout
-                                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                                .logoutRequestMatcher(new AntPathRequestMatcher("/web/logout"))
                                 .permitAll()
                 );
         return http.build();

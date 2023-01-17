@@ -10,14 +10,22 @@ public class Products {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="product_id")
     private int productId;
 
-
+    @Column(name="productname")
     private String productName;
+    @Column(name="productdescription")
     private String productDescription;
+    @Column(name="productquanty")
     private int productQuantity;
+    @Column(name="productprice")
 
     private double productPrice;
+
+
+    @Column(name="user_id")
+    private int userId;
 
     @ManyToMany
     private List<Carts> carts;
@@ -68,6 +76,14 @@ public class Products {
 
     public void setCarts(List<Carts> carts) {
         this.carts = carts;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
 }

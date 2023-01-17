@@ -2,6 +2,7 @@ package com.ecommerce.springbootactivity.service;
 
 
 import com.ecommerce.springbootactivity.dto.UsersDto;
+import com.ecommerce.springbootactivity.entity.Products;
 import com.ecommerce.springbootactivity.entity.Role;
 import com.ecommerce.springbootactivity.entity.Users;
 import com.ecommerce.springbootactivity.repository.RolesRepository;
@@ -14,10 +15,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 
 @Service
@@ -49,7 +47,9 @@ public class UsersService {
         return usersRepository.findByemail(email);
     }
 
-
+    public List<Users> findAll() {
+        return usersRepository.findAll();
+    }
 
 
 }

@@ -4,6 +4,7 @@ package com.ecommerce.springbootactivity.service;
 import com.ecommerce.springbootactivity.entity.Role;
 import com.ecommerce.springbootactivity.entity.Users;
 import com.ecommerce.springbootactivity.repository.UsersRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -21,6 +22,7 @@ public class CustomUsersDetailService implements UserDetailsService {
     @Autowired
     private UsersRepository usersRepository;
     @Override
+    @Transactional
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Users user = usersRepository.findByemail(email);
 

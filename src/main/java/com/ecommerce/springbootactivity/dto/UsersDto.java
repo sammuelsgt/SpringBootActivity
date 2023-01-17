@@ -12,6 +12,16 @@ public class UsersDto {
     private String email;
     private String password;
 
+    public int getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
+    }
+
+    private int roleId;
+
     public int getUserId() {
         return userId;
     }

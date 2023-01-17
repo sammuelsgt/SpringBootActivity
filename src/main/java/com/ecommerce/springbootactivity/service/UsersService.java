@@ -29,17 +29,19 @@ public class UsersService {
     @Autowired
     private RolesRepository rolesRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public void saveUser(UsersDto usersDto){
         Users users = new Users();
         users.setFirstName(usersDto.getFirstName());
         users.setLastName(usersDto.getLastName());
         users.setEmail(usersDto.getEmail());
-        users.setPassword(usersDto.getPassword());
+        users.setPassword(passwordEncoder.encode(usersDto.getPassword()));
 
         Role role = rolesRepository.findByroleName("ROLE_BUYER");
         users.setRoleId(role.getRoleId());
-        users.setRoles(Arrays.asList(role));
+
         usersRepository.save(users);
     }
 
@@ -48,16 +50,6 @@ public class UsersService {
     }
 
 
-    public void register(Users users){
-        try {
-            if(usersRepository.findByemail(users.getEmail()) != null){
-                this.usersRepository.save(users);
-            }
-        }
-        catch ( Exception e){
-
-        }
-    }
 
 
 }

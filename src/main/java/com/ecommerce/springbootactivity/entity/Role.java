@@ -1,5 +1,6 @@
 package com.ecommerce.springbootactivity.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -18,8 +19,8 @@ public class Role {
     @Column(name="rolename")
     private String roleName;
 
-    @ManyToMany
-    private List<Users> users;
+//    @ManyToMany(mappedBy="roles")
+//    private List<Users> users;
 
     public int getRoleId() {
         return roleId;
@@ -36,12 +37,12 @@ public class Role {
     public void setRoleName(String roleName) {
         this.roleName = roleName;
     }
-
-    public List<Users> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<Users> users) {
-        this.users = users;
-    }
+//
+//    public List<Users> getUsers() {
+//        return users;
+//    }
+//
+//    public void setUsers(List<Users> users) {
+//        this.users = users;
+//    }
 }

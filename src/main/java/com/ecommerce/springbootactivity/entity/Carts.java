@@ -10,6 +10,7 @@ public class Carts {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="cart_id")
     private int cart_id;
 
     public int getCart_id() {

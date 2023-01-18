@@ -29,6 +29,8 @@ public class UsersController {
     @GetMapping("/home")
     public String homePage(@CurrentSecurityContext(expression="authentication?.name")
                                String email, Model model){
+
+        System.out.println("UserController:" +usersService.findUserByEmail(email).getRoleId());
         model.addAttribute("user", usersService.findUserByEmail(email));
         model.addAttribute("product" , productsService.findAll());
         System.out.println("test"+email);
@@ -44,6 +46,10 @@ public class UsersController {
         return "users/login";
     }
 
+    @GetMapping("/login/success")
+    public String loginSuccess(){
+        return "users/homepage";
+    }
 
 
     @GetMapping("/logout")
@@ -62,6 +68,7 @@ public class UsersController {
     public String registration(@Validated @ModelAttribute("user") UsersDto usersDto,
                                BindingResult result,
                                Model model){
+        usersService.saveUser(usersDto);
         Users existingUser = usersService.findUserByEmail(usersDto.getEmail());
 
         if(existingUser != null && existingUser.getEmail() != null && !existingUser.getEmail().isEmpty()){
@@ -74,7 +81,7 @@ public class UsersController {
             return "users/register";
         }
 
-        usersService.saveUser(usersDto);
+
         return "redirect:/register?success";
     }
 

@@ -7,6 +7,7 @@ import com.ecommerce.springbootactivity.entity.Products;
 import com.ecommerce.springbootactivity.service.ProductsService;
 import com.ecommerce.springbootactivity.service.UsersService;
 import jakarta.persistence.Access;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +22,7 @@ public class ProductsController
     @Autowired
     private ProductsService productsService;
     @GetMapping("/products/{user_id}")
-    public String showProductsForm(@PathVariable int user_id, ProductsDto productsDto ,     Model model){
+    public String showProductsForm(@PathVariable int user_id, ProductsDto productsDto , Model model){
 
 
 

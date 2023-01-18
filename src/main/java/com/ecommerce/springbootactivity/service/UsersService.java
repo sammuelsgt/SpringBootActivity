@@ -37,19 +37,28 @@ public class UsersService {
         users.setLastName(usersDto.getLastName());
         users.setEmail(usersDto.getEmail());
         users.setPassword(passwordEncoder.encode(usersDto.getPassword()));
-
-        Role role = rolesRepository.findByroleName("ROLE_BUYER");
-        users.setRoleId(role.getRoleId());
+        users.setRoleId(usersDto.getRoleId());
 
         usersRepository.save(users);
     }
 
     public Users findUserByEmail(String email){
+
+        System.out.println("UserController:" +usersRepository.findByemail(email).getRoleId());
         return usersRepository.findByemail(email);
     }
 
     public Users findUserById(int user_id) throws BadRequestException {
         return usersRepository.findById(user_id).orElseThrow(() ->new BadRequestException("User cannot be found"));
+    }
+
+    public boolean checkUserRole(int role_id){
+        if(usersRepository.findByroleId(role_id).getRoleId() == 1){
+            return true;
+        }
+
+        return false;
+
     }
 
 

@@ -35,12 +35,13 @@ public class SecurityConfig {
                         authorize.requestMatchers("/web/register/**").permitAll()
                                 .requestMatchers("/web/**").permitAll()
                                 .requestMatchers("/web/login").permitAll()
+
                                 .anyRequest().denyAll()
 
                 ).formLogin(
                         form -> form
                                 .loginPage("/web/login")
-                                .loginProcessingUrl("/web/login")
+                                .loginProcessingUrl("/web/login/success")
                                 .defaultSuccessUrl("/web/home")
                                 .permitAll()
                 ).logout(

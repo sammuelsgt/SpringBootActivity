@@ -48,12 +48,18 @@ public class ProductsService {
     }
 
 
-    public void delete(int id) {
-        productsRepository.deleteById(id);
-    }
+//    public void delete(int id) {
+//        productsRepository.deleteById(id);
+//    }
 
+    public void deleteProductById(int id) {
+
+        productsRepository.deleteByproductId(id);
+    }
 
     public List<Products> findAllById(List<Integer> ids) {
         return productsRepository.findAllById(ids);
     }
+
+
 }

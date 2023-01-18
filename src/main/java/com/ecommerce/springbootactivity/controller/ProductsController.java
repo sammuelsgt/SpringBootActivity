@@ -38,6 +38,15 @@ public class ProductsController
         return "redirect:/web/products?success";
     }
 
+    @GetMapping(path = "/products/delete/{id}")
+    @Transactional
+    public String deleteProduct(@PathVariable(value = "id") int id) {
+
+        this.productsService.deleteProductById(id);
+        return "redirect: /web/homepage?deleted";
+    }
+
+    // Update product
 
 
 }

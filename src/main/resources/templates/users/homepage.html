@@ -50,6 +50,7 @@
                 <div class="card-body">
                     <p class="card-text" th:text="${product.productName}"></p>
                     <p class="card-text" th:text="${product.productDescription}"></p>
+                    <a th:href="@{/web/products/delete/{productId}(productId=${product.productId})}" class="btn btn-danger">Delete</a>
                 </div>
             </div>
     </div>

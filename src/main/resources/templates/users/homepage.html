@@ -11,7 +11,7 @@
           crossorigin="anonymous">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" th>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" th:href="@{/web/home}">Home</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -50,6 +50,7 @@
                 <div class="card-body">
                     <p class="card-text" th:text="${product.productName}"></p>
                     <p class="card-text" th:text="${product.productDescription}"></p>
+                    <a th:href="@{/web/products/update/{productId}(productId=${product.productId})}" class="btn btn-primary">Update</a>
                     <a th:href="@{/web/products/delete/{productId}(productId=${product.productId})}" class="btn btn-danger">Delete</a>
                 </div>
             </div>

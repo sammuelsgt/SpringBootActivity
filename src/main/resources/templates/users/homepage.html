@@ -22,7 +22,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/web/products/{user_id}(user_id = ${user.userId})}"  >Add Product</a>
+                    <a class="nav-link active" aria-current="page" th:href="@{/web/products/{user_id}(user_id = ${user.userId})}">Add Product</a>
                 </li>
                 <li>
                     <a>Log out</a>
@@ -31,16 +31,17 @@
         </div>
     </div>
 </nav>
-<br /><br />
+<br /><br/>
 <div class="container">
     <div class="row">
-        <div class="col-md-6 offset-md-3">
-
+        <div class="col-md-4">
             <div class="card" style="width: 18rem;" th:each=" product :${product}">
                 <img src="..." class="card-img-top" alt="...">
                 <div class="card-body">
                     <p class="card-text" th:text="${product.productName}"></p>
                     <p class="card-text" th:text="${product.productDescription}"></p>
+<!--                    <button type="button" class="btn btn-primary" th:text="product.productId">Add to cart</button>-->
+                    <a th:href="@{/web/products/delete/{productId}(productId=${product.productId})}" class="btn btn-danger">Delete</a>
                 </div>
             </div>
     </div>

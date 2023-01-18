@@ -34,6 +34,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests((authorize) ->
                         authorize.requestMatchers("/web/register/**").permitAll()
                                 .requestMatchers("/web/**").permitAll()
+                                .requestMatchers("/web/products/**").permitAll()
                                 .requestMatchers("/web/login").permitAll()
                                 .anyRequest().denyAll()
 

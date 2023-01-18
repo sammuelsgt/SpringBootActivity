@@ -48,10 +48,13 @@ public class ProductsService {
     }
 
 
-    public void delete(int id) {
-        productsRepository.deleteById(id);
-    }
+//    public void delete(int id) {
+//        productsRepository.deleteById(id);
+//    }
 
+    public void deleteProductById(int id) {
+        this.productsRepository.deleteById(id);
+    }
 
     public List<Products> findAllById(List<Integer> ids) {
         return productsRepository.findAllById(ids);

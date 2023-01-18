@@ -37,6 +37,11 @@ public class ProductsController
         return "redirect:/web/products?success";
     }
 
+    @GetMapping(path = "/deleteTask/{id}")
+    public String deleteTask(@PathVariable(value = "id") Integer id) {
+        this.productsService.deleteProductById(id);
+        return "redirect/web/products?deleted";
+    }
 
 
 }

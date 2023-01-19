@@ -1,20 +1,10 @@
-package com.ecommerce.springbootactivity.entity;
+package com.ecommerce.springbootactivity.dto;
 
-
-import jakarta.persistence.*;
-
-@Entity
-@Table(name = "carts")
-public class Carts {
-
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="cart_id")
+public class CartsDto {
     private int cartId;
 
-    @Column(name="product_id")
     private int productId;
+
     public int getProductId() {
         return productId;
     }
@@ -30,5 +20,4 @@ public class Carts {
     public void setCartId(int cart_id) {
         this.cartId = cart_id;
     }
-
 }

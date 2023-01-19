@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -31,12 +32,13 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http ) throws Exception {
         http.csrf().disable()
+                .sessionManagement(session -> session.sessionCreationPolicy((SessionCreationPolicy.ALWAYS)))
                 .authorizeHttpRequests((authorize) ->
                         authorize.requestMatchers("/web/register/**").permitAll()
                                 .requestMatchers("/web/**").permitAll()
-                                .requestMatchers("/web/login").permitAll()
+                                .requestMatchers("/web/login/**").permitAll()
 
-                                .anyRequest().denyAll()
+                                .anyRequest().permitAll()
 
                 ).formLogin(
                         form -> form
@@ -46,6 +48,7 @@ public class SecurityConfig {
                                 .permitAll()
                 ).logout(
                         logout -> logout
+                                .deleteCookies("JSESSIONID")
                                 .logoutRequestMatcher(new AntPathRequestMatcher("/web/logout"))
                                 .permitAll()
                 );

@@ -11,7 +11,6 @@ public class ProductsDto {
 
     private double productPrice;
 
-
     private int userId;
     public int getProductId() {
         return productId;

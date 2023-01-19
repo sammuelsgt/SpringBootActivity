@@ -43,7 +43,6 @@ public class Users {
     @JoinTable(name = "users",
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "product_id", referencedColumnName = "product_id")})
-
     private List<Products> products;
 
     public int getUserId() {

@@ -23,20 +23,24 @@ public class UsersController {
     @Autowired
     ProductsService productsService;
 
-
-
-
     @GetMapping("/home")
     public String homePage(@CurrentSecurityContext(expression="authentication?.name")
                                String email, Model model){
 
-        System.out.println("UserController:" +usersService.findUserByEmail(email).getRoleId());
-        model.addAttribute("user", usersService.findUserByEmail(email));
-        model.addAttribute("product" , productsService.findAll());
-        System.out.println("test"+email);
-        return "users/homepage";
+            if(usersService.findUserByEmail(email).getRoleId() == 1){
+                model.addAttribute("user", usersService.findUserByEmail(email));
+                model.addAttribute("productBuyer" , productsService.findAll());
+                return "users/homepagebuyer";
+            } else if (usersService.findUserByEmail(email).getRoleId() == 2) {
+                model.addAttribute("user", usersService.findUserByEmail(email));
+                model.addAttribute("product" , productsService.findAll());
+                return "users/homepage";
 
+            }
+
+            return "users/login";
     }
+
 
 
 
@@ -48,7 +52,7 @@ public class UsersController {
 
     @GetMapping("/login/success")
     public String loginSuccess(){
-        return "users/homepage";
+        return "redirect:/web/home";
     }
 
 
@@ -56,6 +60,7 @@ public class UsersController {
     public String logout(){
         return "users/homepage";
     }
+
     @GetMapping("/register")
     public String showRegistrationForm(Model model){
 
@@ -70,7 +75,6 @@ public class UsersController {
                                Model model){
         usersService.saveUser(usersDto);
         Users existingUser = usersService.findUserByEmail(usersDto.getEmail());
-
         if(existingUser != null && existingUser.getEmail() != null && !existingUser.getEmail().isEmpty()){
             result.rejectValue("email", null,
                     "There is already an account registered with the same email");

@@ -14,6 +14,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Controller
 @RequestMapping("/web")
@@ -29,11 +35,22 @@ public class ProductsController {
         return "users/products/products";
     }
 
-    @PostMapping("/products/save")
-    public String save(@Validated @ModelAttribute("product") ProductsDto productsDto) {
-        productsService.save(productsDto);
+        // Add Product
+        @PostMapping("/products/save")
+        @Transactional
+        public String save(@ModelAttribute(value = "product") ProductsDto productsDto,
+                           @RequestParam("imageProduct") MultipartFile file,
+                           @RequestParam("imgName") String imgName) throws IOException {
+        productsService.save(productsDto, file, imgName);
         return "redirect:/web/products?success";
     }
+
+//    @PostMapping("/products/save")
+//    public String save(@Validated @ModelAttribute("product") ProductsDto productsDto) {
+//        productsService.save(productsDto);
+//        return "redirect:/web/products?success";
+//    }
+
 
     @GetMapping(path = "/products/delete/{id}")
     @Transactional
@@ -42,7 +59,7 @@ public class ProductsController {
         return "redirect: /web/homepage?deleted";
     }
 
-    // Update product
+    // Update Task Form
     @GetMapping(path = "/products/update/{product_id}")
     public String updateTaskForm(@PathVariable(value = "product_id") int product_id, Model model) {
         Products products = productsService.getProductById(product_id);
@@ -50,10 +67,12 @@ public class ProductsController {
         return "users/products/updateproducts";
     }
 
-    @PostMapping(path = "/products/updateProd/{product_id}")
-    public String updateProduct(@PathVariable int product_id, @Validated @RequestBody Products productDetails) {
-        productDetails.setProductId(product_id);
-        productsService.update(product_id, productDetails);
-        return "redirect: /web/homepage?updateProduct";
+
+    // Update product
+    @PostMapping("/products/saveProduct/{product_id}")
+    public String save(@PathVariable(value = "product_id") int product_id, @Validated @ModelAttribute("product") Products products) {
+        products.setProductId(product_id);
+        productsService.update(products);
+        return "redirect:/web/products?success";
     }
 }

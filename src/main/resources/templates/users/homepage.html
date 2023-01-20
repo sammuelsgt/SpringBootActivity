@@ -43,19 +43,23 @@
 <br /><br />
 <div class="container">
     <div class="row">
-        <div class="col-md-6 offset-md-3">
+            <div class="col-md-4 p-3" th:each="product: ${product}">
+                <div class="card" style="width: 18rem">
+                    <img th:src="@{${'/'+product.productImage}}" class="card-img-top" alt="product image" style="width: 150px; height: 150px">
 
-            <div class="card" style="width: 18rem;" th:each=" product :${product}">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <p class="card-text" th:text="${product.productName}"></p>
-                    <p class="card-text" th:text="${product.productDescription}"></p>
-                    <a th:href="@{/web/products/update/{productId}(productId=${product.productId})}" class="btn btn-primary">Update</a>
-                    <a th:href="@{/web/products/delete/{productId}(productId=${product.productId})}" class="btn btn-danger">Delete</a>
+                    <div class="card-body">
+                        <p class="font-weight-bold" th:text="${product.productName}"></p>
+                        <p class="card-text" th:text="${product.productDescription}"></p>
+                       <span>Stocks: </span>
+                        <span class="card-text" th:text="${product.productQuantity}"></span>
+                        <span> ₱ </span>
+                        <p class="card-text" th:text="${product.productPrice}"></p>
+                        <a th:href="@{/web/products/update/{productId}(productId=${product.productId})}" class="btn btn-primary">Update</a>
+                        <a th:href="@{/web/products/delete/{productId}(productId=${product.productId})}" class="btn btn-danger">Delete</a>
+                    </div>
                 </div>
             </div>
     </div>
-</div>
 </div>
 </body>
 </html>

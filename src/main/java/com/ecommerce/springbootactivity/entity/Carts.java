@@ -15,6 +15,8 @@ public class Carts {
 
     @Column(name="product_id")
     private int productId;
+
+
     public int getProductId() {
         return productId;
     }

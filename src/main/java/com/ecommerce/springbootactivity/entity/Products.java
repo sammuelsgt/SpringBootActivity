@@ -13,6 +13,8 @@ public class Products {
     @Column(name="product_id")
     private int productId;
 
+    @Column(name = "productimage")
+    private String productImage;
     @Column(name="productname")
     private String productName;
     @Column(name="productdescription")
@@ -20,9 +22,9 @@ public class Products {
     @Column(name="productquantity")
     private int productQuantity;
     @Column(name="productprice")
-
     private double productPrice;
 
+//    private String imgName;
 
     @Column(name="user_id")
     private int userId;
@@ -31,6 +33,7 @@ public class Products {
     @JoinTable(name = "carts",
             joinColumns = {@JoinColumn(name = "product_id", referencedColumnName = "product_id")},
             inverseJoinColumns = {@JoinColumn(name = "cart_id", referencedColumnName = "cart_id")})
+
     private List<Carts> carts;
 
     public int getProductId() {
@@ -39,6 +42,14 @@ public class Products {
 
     public void setProductId(int productId) {
         this.productId = productId;
+    }
+
+    public String getProductImage() {
+        return productImage;
+    }
+
+    public void setProductImage(String productImage) {
+        this.productImage = productImage;
     }
 
     public String getProductName() {
@@ -88,5 +99,13 @@ public class Products {
     public void setUserId(int userId) {
         this.userId = userId;
     }
+
+//    public String getImgName() {
+//        return imgName;
+//    }
+//
+//    public void setImgName(String imgName) {
+//        this.imgName = imgName;
+//    }
 
 }

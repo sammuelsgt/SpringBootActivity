@@ -37,7 +37,6 @@ public class SecurityConfig {
                         authorize.requestMatchers("/web/register/**").permitAll()
                                 .requestMatchers("/web/**").permitAll()
                                 .requestMatchers("/web/login/**").permitAll()
-
                                 .anyRequest().permitAll()
 
                 ).formLogin(
@@ -60,9 +59,5 @@ public class SecurityConfig {
         auth
                 .userDetailsService(userDetailsService)
                 .passwordEncoder(passwordEncoder());
-
     }
-
-
-
 }

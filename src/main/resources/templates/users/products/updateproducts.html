@@ -44,16 +44,34 @@
         <form
                 method="post"
                 role="form"
-                th:action="@{/web/products/updateProd/{product_id}(product_id=${product.productId})}"
+                th:action="@{/web/products/saveProduct/{product_id}(product_id=${product.productId})}"
                 th:object="${product}"
+                enctype="multipart/form-data"
         >
           <input
                   id="user_id"
                   name="user_id"
                   th:field="${product.userId}"
                   type="hidden"
-
           />
+
+          <input type="hidden" name="imgName" th:value="${product.productImage}">
+
+          <div class="form-group mb-3">
+            <label class="form-label">Product Image</label>
+            <input
+                    class="form-control"
+                    id="productImage"
+                    name="productImage"
+                    placeholder="Enter product name"
+                    th:field="*{productImage}"
+                    type="file"
+                    accept="image/*"
+            />
+            <p th:errors = "*{productImage}" class="text-danger"
+               th:if="${#fields.hasErrors('productImage')}"></p>
+          </div>
+
           <div class="form-group mb-3">
             <label class="form-label">Product Name</label>
             <input
@@ -115,8 +133,6 @@
           <!--            </select>-->
 
           <!--          </div>-->
-
-
 
           <div class="form-group">
             <button class="btn btn-primary" type="submit">Update</button>

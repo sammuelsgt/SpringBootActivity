@@ -4,12 +4,14 @@ public class ProductsDto {
 
     private int productId;
 
-
+    private String productImage;
     private String productName;
     private String productDescription;
     private int productQuantity;
 
     private double productPrice;
+
+//    private String imgName;
 
     private int userId;
     public int getProductId() {
@@ -18,6 +20,14 @@ public class ProductsDto {
 
     public void setProductId(int productId) {
         this.productId = productId;
+    }
+
+    public String getProductImage() {
+        return productImage;
+    }
+
+    public void setProductImage(String productImage) {
+        this.productImage = productImage;
     }
 
     public String getProductName() {
@@ -59,4 +69,14 @@ public class ProductsDto {
     public void setUserId(int userId) {
         this.userId = userId;
     }
+
+//    public String getImgName() {
+//        return imgName;
+//    }
+//
+//    public void setImgName(String imgName) {
+//        this.imgName = imgName;
+//    }
 }
+
+

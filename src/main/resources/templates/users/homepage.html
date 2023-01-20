@@ -45,7 +45,7 @@
     <div class="row">
             <div class="col-md-4 p-3" th:each="product: ${product}">
                 <div class="card" style="width: 18rem">
-                    <img th:src="@{${'/'+product.productImage}}" class="card-img-top" alt="product image" style="width: 150px; height: 150px">
+                    <img th:src="@{${'/'+product.productImage}}" class="card-img-top img-fluid" alt="product image" style="width: 150px; height: 150px">
 
                     <div class="card-body">
                         <p class="font-weight-bold" th:text="${product.productName}"></p>

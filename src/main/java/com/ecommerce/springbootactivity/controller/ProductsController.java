@@ -38,18 +38,12 @@ public class ProductsController {
         // Add Product
         @PostMapping("/products/save")
         @Transactional
-        public String save(@ModelAttribute(value = "product") ProductsDto productsDto,
+        public String saveProduct(@ModelAttribute(value = "product") ProductsDto productsDto,
                            @RequestParam("imageProduct") MultipartFile file,
                            @RequestParam("imgName") String imgName) throws IOException {
         productsService.save(productsDto, file, imgName);
         return "redirect:/web/products?success";
     }
-
-//    @PostMapping("/products/save")
-//    public String save(@Validated @ModelAttribute("product") ProductsDto productsDto) {
-//        productsService.save(productsDto);
-//        return "redirect:/web/products?success";
-//    }
 
 
     @GetMapping(path = "/products/delete/{id}")
@@ -68,11 +62,14 @@ public class ProductsController {
     }
 
 
-    // Update product
     @PostMapping("/products/saveProduct/{product_id}")
-    public String save(@PathVariable(value = "product_id") int product_id, @Validated @ModelAttribute("product") Products products) {
+    public String updateProduct(@PathVariable(value = "product_id") int product_id,
+                       @Validated @ModelAttribute("product") Products products,
+                       @RequestParam(value = "imageProduct") MultipartFile file,
+                       @RequestParam(value = "imgName") String imgName) throws IOException {
         products.setProductId(product_id);
-        productsService.update(products);
+        productsService.update(products, file, imgName);
         return "redirect:/web/products?success";
     }
+
 }

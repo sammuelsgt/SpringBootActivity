@@ -33,11 +33,10 @@ public class ProductsService {
 
     public static final String imageDir = "G:\\My Drive\\SpringBootActivity\\target\\classes\\static";
     //G:\My Drive\SpringBootActivity\target\classes\static
-    public void save(ProductsDto productsDto, MultipartFile file, String imgName) throws IOException {
-        Products products = new Products();
 
-
+    public String img(MultipartFile file, String imgName) throws IOException {
         String imgOrigLoc;
+
         if(!file.isEmpty()) {
             imgOrigLoc = file.getOriginalFilename();
             Path fileNameAndPath = Paths.get(imageDir,imgOrigLoc);
@@ -45,8 +44,14 @@ public class ProductsService {
         } else {
             imgOrigLoc = imgName;
         }
-        productsDto.setProductImage(imgOrigLoc);
 
+        return imgOrigLoc;
+    }
+
+
+    public void save(ProductsDto productsDto, MultipartFile file, String imgName) throws IOException {
+        Products products = new Products();
+        productsDto.setProductImage(img(file, imgName));
 
         products.setProductName(productsDto.getProductName());
         products.setProductDescription(productsDto.getProductDescription());
@@ -62,7 +67,8 @@ public class ProductsService {
         return productsRepository.findById(id).orElseThrow(()-> new BadRequestException("Email cannot be found"));
     }
 
-    public Products update(Products product) {
+    public Products update(Products product, MultipartFile file, String imgName) throws IOException {
+        product.setProductImage(img(file, imgName));
         return productsRepository.save(product);
     }
 

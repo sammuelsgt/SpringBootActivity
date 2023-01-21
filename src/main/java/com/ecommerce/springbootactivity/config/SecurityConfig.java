@@ -23,7 +23,6 @@ public class SecurityConfig {
     @Autowired
     private UserDetailsService userDetailsService;
 
-
     @Bean
     public static PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
@@ -38,7 +37,6 @@ public class SecurityConfig {
                                 .requestMatchers("/web/**").permitAll()
                                 .requestMatchers("/web/login/**").permitAll()
                                 .anyRequest().permitAll()
-
                 ).formLogin(
                         form -> form
                                 .loginPage("/web/login")

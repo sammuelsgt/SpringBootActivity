@@ -32,7 +32,7 @@ public class Products {
     private int userId;
 
     @ManyToMany
-    @JoinTable(name = "products",
+    @JoinTable(name = "carts",
             joinColumns = {@JoinColumn(name = "product_id", referencedColumnName = "product_id")},
             inverseJoinColumns = {@JoinColumn(name = "cart_id", referencedColumnName = "cart_id")})
     private List<Carts> carts;

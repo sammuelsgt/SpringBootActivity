@@ -9,13 +9,8 @@ public class ProductsDto {
     private double productPrice;
     private String productImage;
 
-    public String getProductImage() {
-        return productImage;
-    }
 
-    public void setProductImage(String productImage) {
-        this.productImage = productImage;
-    }
+
     private int userId;
     public int getProductId() {
         return productId;
@@ -63,5 +58,13 @@ public class ProductsDto {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public String getProductImage() {
+        return productImage;
+    }
+
+    public void setProductImage(String productImage) {
+        this.productImage = productImage;
     }
 }

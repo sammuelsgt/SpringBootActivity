@@ -51,31 +51,15 @@ public class ProductsService {
         return productsRepository.save(products);
     }
 
-    public Products update(ProductsDto productsDto, MultipartFile file, String imgName) throws IOException {
-        Products products = new Products();
+    public Products update(Products productsDto, MultipartFile file, String imgName) throws IOException {
         productsDto.setProductImage(img(file, imgName));
-        products.setProductName(productsDto.getProductName());
-        products.setProductDescription(productsDto.getProductDescription());
-        products.setProductQuantity(productsDto.getProductQuantity());
-        products.setProductPrice((productsDto.getProductPrice()));
-        products.setUserId((productsDto.getUserId()));
-        products.setProductImage(productsDto.getProductImage());
-        products.setProductId(productsDto.getProductId());
 
-        return productsRepository.save(products);
+        return productsRepository.save(productsDto);
     }
-
-
-
-    public Products findById(int id) {
-        return productsRepository.findById(id).orElseThrow(()-> new BadRequestException("Email cannot be found"));
-    }
-
-
 
     public Products getProductById(int id) {
         Optional<Products> optionalProducts = productsRepository.findById(id);
-        Products products = null;
+        Products products;
 
         if (optionalProducts.isPresent()) {
             products = optionalProducts.get();
@@ -85,12 +69,12 @@ public class ProductsService {
         return products;
     }
 
-    public void deleteProductById(int id) {
-        productsRepository.deleteByproductId(id);
+    public void deleteProductById(int product_id) {
+        Products products = productsRepository.findById(product_id).orElseThrow();
+        productsRepository.delete(products);
     }
 
-    public List<Products> findAllById(List<Integer> ids) {
-        return productsRepository.findAllById(ids);
-    }
+
+
 
 }

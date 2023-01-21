@@ -25,7 +25,6 @@ public class ProductsController {
         model.addAttribute("product", productsDto);
         return "users/products/products";
     }
-
     // Add Product
     @PostMapping("/products/save")
     @Transactional
@@ -36,11 +35,12 @@ public class ProductsController {
         return "redirect:/web/home?product-added";
     }
 
-    @GetMapping(path = "/products/delete/{id}")
+    @GetMapping ("/products/delete/{productId}")
     @Transactional
-    public String deleteProduct(@PathVariable(value = "id") int id) {
-        this.productsService.deleteProductById(id);
-        return "redirect:/web/home?deleted";
+    public String deleteProduct(@PathVariable int productId) {
+        System.out.println(productId);
+        productsService.deleteProductById(productId);
+        return "redirect:/web/home?product-deleted";
     }
 
     // Update Task Form
@@ -53,9 +53,10 @@ public class ProductsController {
 
     @PostMapping("/products/saveProduct/{product_id}")
     public String updateProduct(@PathVariable(value = "product_id") int product_id,
-                                @Validated @ModelAttribute("product") ProductsDto productsDto,
+                                @Validated @ModelAttribute("product") Products productsDto,
                                 @RequestParam(value = "imageProduct") MultipartFile file,
                                 @RequestParam(value = "imgName") String imgName) throws IOException {
+
         productsDto.setProductId(product_id);
         productsService.update(productsDto, file, imgName);
         return "redirect:/web/home?product-updated";

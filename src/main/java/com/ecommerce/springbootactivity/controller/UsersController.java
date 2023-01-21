@@ -57,10 +57,8 @@ public class UsersController {
     }
 
     @GetMapping("/register")
-    public String showRegistrationForm(Model model){
-
-        UsersDto user = new UsersDto();
-        model.addAttribute("user", user);
+    public String showRegistrationForm(Model model, UsersDto usersDto){
+        model.addAttribute("user", usersDto);
         return "users/register";
     }
 

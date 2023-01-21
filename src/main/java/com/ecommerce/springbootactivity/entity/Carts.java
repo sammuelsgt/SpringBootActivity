@@ -22,15 +22,7 @@ public class Carts {
     @Column(name="quantity")
     private int quantity;
 
-    @ManyToMany(mappedBy = "carts", fetch = FetchType.LAZY)
-    private Set<Products> products = new HashSet<>();
-    public Set<Products> getProducts() {
-        return products;
-    }
 
-    public void setProducts(Set<Products> products) {
-        this.products = products;
-    }
 
     public int getQuantity() {
         return quantity;

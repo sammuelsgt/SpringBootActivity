@@ -34,9 +34,9 @@ public class SecurityConfig {
         http.csrf().disable()
                 .sessionManagement(session -> session.sessionCreationPolicy((SessionCreationPolicy.ALWAYS)))
                 .authorizeHttpRequests((authorize) ->
-                        authorize.requestMatchers("/web/register/**", "/web/login/**").permitAll()
-                                .requestMatchers("/web/**").permitAll()
-                                .requestMatchers("/web/login/**").permitAll()
+                        authorize.requestMatchers("/web/register/**", "/web/login/**","/web/home").permitAll()
+                                .requestMatchers("/web/products/**").hasRole("SELLER")
+
                                 .anyRequest().permitAll()
 
                 ).formLogin(

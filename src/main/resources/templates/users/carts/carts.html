@@ -29,34 +29,54 @@
   </div>
 </nav>
 <br /><br /><br />
+
+<!--new cart-->
 <div class="container">
-  <div class="row col-md-8 offset-md-2">
-    <div class="card">
-      <div class="card-header">
-        <h2 class="text-center">Cart list</h2>
-      </div>
+  <div class="row">
+    <section >
+      <div class="container py-5">
+        <div class="row justify-content-center">
+          <div class="col-md-4 col-lg-6 col-xl-4" th:each="cart: ${carts}">
+            <div class="card text-black">
+              <i class="fab fa-apple fa-lg pt-3 pb-1 px-3"></i>
+              <img th:src="@{${'/'+cart[10]}}"
+                   class="card-img-top" th:alt="${'/' + cart[10]}" style="height: 200px">
+              <div class="card-body d-flex flex-column" style="height: 350px">
+                <div class="text-center">
+                  <h5 class="card-title" th:text="${cart[5]}">  </h5>
+                  <p class="text-muted mb-4" th:text="${cart[6]}" ></p>
+                </div>
+                <div>
+                  <div class="d-flex justify-content-between">
+                    <span>Price: </span><span th:text="${cart[8]}"></span>
+                  </div>
+                  <div class="d-flex justify-content-between">
+                    <span>Quantity: </span><span th:text="${cart[2]}"></span>
+                  </div>
+                </div>
+                <div class="mt-auto   d-flex justify-content-center">
+                  <form
+                          method="post"
+                          role="form"
+                          th:action="@{/web/remove-cart/{productId}(productId=${cart[1]})}"
+                          th:object="${carts}"
+                  >
 
-      <div class="card" style="width: 18rem;" th:each=" cart :${carts}">
-        <img src="..." class="card-img-top" alt="...">
-        <div class="card-body" >
-          <label class="control-label">Title: </label> <p class="card-text" th:text="${cart[5]}"></p> <!--product title-->
-          <label class="control-label">Description: </label> <p class="card-text" th:text="${cart[6]}"></p>    <!--product description -->
-          <label class="control-label">Price: </label> <p class="card-text" th:text="${cart[8]}"></p>     <!--product price-->
-          <label class="control-label">Quantity: </label> <p class="card-text" th:text="${cart[2]}"></p>   <!--quantity-->
+                    <button type="submit" class="btn btn-danger" >Delete</button>
 
-          <form
-                  method="post"
-                  role="form"
-                  th:action="@{/web/remove-cart/{productId}(productId=${cart[1]})}"
-                  th:object="${carts}"
-          >
-
-            <button type="submit" class="btn btn-danger" >Delete</button>
-          </form>
+                </form>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
+
   </div>
-</div>
+</div> 
+
+
+
 </body>
 </html>

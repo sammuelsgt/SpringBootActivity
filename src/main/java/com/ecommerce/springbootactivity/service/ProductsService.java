@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -26,10 +27,10 @@ public class ProductsService {
     public static final String imageDir = "G:\\My Drive\\SpringBootActivity\\target\\classes\\static";
 
     public String img(MultipartFile file, String imgName) throws IOException {
-        String imgOrigLoc;
+       String imgOrigLoc;
 
         if(!file.isEmpty()) {
-            imgOrigLoc = file.getOriginalFilename();
+            imgOrigLoc = URLDecoder.decode( file.getOriginalFilename(), "UTF-8");
             Path fileNameAndPath = Paths.get(imageDir,imgOrigLoc);
             Files.write(fileNameAndPath, file.getBytes());
         } else {

@@ -23,7 +23,7 @@ public interface CartsRepository extends JpaRepository<Carts, Integer > {
     @Query(nativeQuery = true,
     value="select c.cart_id,c.product_id as cartproduct_id ,c.quantity as cartquantity, c.user_id as cartuser_id, " +
             " p.product_id, p.productname, p.productdescription, p.productquantity, " +
-            " p.productprice, p.user_id from Carts c" +
+            " p.productprice, p.user_id, p.productimage from Carts c" +
             " inner join Products p on c.product_id = p.product_id where c.user_id=:user_id and c.quantity > 0 ")
     List<Object[]> productsInCart(@Param("user_id")int user_id);
 

@@ -78,6 +78,7 @@
                                 placeholder="Enter product name"
                                 th:field="*{productName}"
                                 type="text"
+                                required
                         />
                         <p th:errors = "*{productName}" class="text-danger"
                            th:if="${#fields.hasErrors('productName')}"></p>
@@ -92,6 +93,7 @@
                                 placeholder="Enter Product Description"
                                 th:field="*{productDescription}"
                                 type="text"
+                                required
                         />
                         <p th:errors = "*{productDescription}" class="text-danger"
                            th:if="${#fields.hasErrors('productDescription')}"></p>
@@ -105,6 +107,7 @@
                                 name="productQuantity"
                                 placeholder="Enter Product Quantity"
                                 th:field="*{productQuantity}"
+                                required
 
                         />
                         <p th:errors = "*{productQuantity}" class="text-danger"
@@ -119,6 +122,7 @@
                                 name="productPrice"
                                 placeholder="Enter Product Price"
                                 th:field="*{productPrice}"
+                                required
 
                         />
                         <p th:errors = "*{productPrice}" class="text-danger"

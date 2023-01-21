@@ -35,7 +35,8 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy((SessionCreationPolicy.ALWAYS)))
                 .authorizeHttpRequests((authorize) ->
                         authorize.requestMatchers("/web/register/**", "/web/login/**","/web/home").permitAll()
-                                .requestMatchers("/web/products/**").hasRole("SELLER")
+                                .requestMatchers("/web/products/**","/web/products/").hasRole("SELLER")
+                                .requestMatchers("/web/cartlist").hasRole("BUYER")
 
                                 .anyRequest().permitAll()
 
@@ -44,6 +45,7 @@ public class SecurityConfig {
                                 .loginPage("/web/login")
                                 .loginProcessingUrl("/web/login/success")
                                 .defaultSuccessUrl("/web/home")
+
                                 .permitAll()
                 ).logout(
                         logout -> logout

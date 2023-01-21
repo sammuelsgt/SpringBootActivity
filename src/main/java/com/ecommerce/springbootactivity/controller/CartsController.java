@@ -27,6 +27,7 @@ public class CartsController {
     public String showCartList(@CurrentSecurityContext(expression="authentication?.name")
                                    String email, Model model) {
 
+
         model.addAttribute("carts",
                 cartsService.findAll(usersService.findUserByEmail(email).getUserId()));
 
@@ -37,7 +38,6 @@ public class CartsController {
     public String addToCart(@PathVariable int product_id,
                             @CurrentSecurityContext(expression="authentication?.name")
     String email){
-
 
         cartsService.addCart(usersService.findUserByEmail(email).getUserId(),product_id);
         return "redirect:/web/home";

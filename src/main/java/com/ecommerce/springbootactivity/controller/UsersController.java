@@ -40,11 +40,6 @@ public class UsersController {
 
             return "users/login";
     }
-
-
-
-
-
     @GetMapping("/login")
     public String login(){
         return "users/login";
@@ -73,7 +68,7 @@ public class UsersController {
     public String registration(@Validated @ModelAttribute("user") UsersDto usersDto,
                                BindingResult result,
                                Model model){
-        usersService.saveUser(usersDto);
+
         Users existingUser = usersService.findUserByEmail(usersDto.getEmail());
         if(existingUser != null && existingUser.getEmail() != null && !existingUser.getEmail().isEmpty()){
             result.rejectValue("email", null,
@@ -84,14 +79,7 @@ public class UsersController {
             model.addAttribute("user", usersDto);
             return "users/register";
         }
-
-
-        return "redirect:/register?success";
+        usersService.saveUser(usersDto);
+        return "redirect:/web/register?success";
     }
-
-
-
-
-
-
 }

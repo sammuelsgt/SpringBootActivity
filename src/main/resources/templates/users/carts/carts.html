@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+  <meta charset="UTF-8">
+  <title>Cart List</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+        crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" th:href="@{/web/home}">Home</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" th:href="@{/web/logout}">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<br /><br /><br />
+<div class="container">
+  <div class="row col-md-8 offset-md-2">
+    <div class="card">
+      <div class="card-header">
+        <h2 class="text-center">Cart list</h2>
+      </div>
+
+      <div class="card" style="width: 18rem;" th:each=" cart :${carts}">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body" >
+          <label class="control-label">Title: </label> <p class="card-text" th:text="${cart[5]}"></p> <!--product title-->
+          <label class="control-label">Description: </label> <p class="card-text" th:text="${cart[6]}"></p>    <!--product description -->
+          <label class="control-label">Price: </label> <p class="card-text" th:text="${cart[8]}"></p>     <!--product price-->
+          <label class="control-label">Quantity: </label> <p class="card-text" th:text="${cart[2]}"></p>   <!--quantity-->
+
+          <form
+                  method="post"
+                  role="form"
+                  th:action="@{/web/remove-cart/{productId}(productId=${cart[1]})}"
+                  th:object="${carts}"
+          >
+
+            <button type="submit" class="btn btn-danger" >Delete</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

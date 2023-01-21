@@ -20,15 +20,19 @@ public class Products {
     @Column(name="productquantity")
     private int productQuantity;
     @Column(name="productprice")
-
     private double productPrice;
+
+
+
+    @Column(name = "productimage")
+    private String productImage;
 
 
     @Column(name="user_id")
     private int userId;
 
     @ManyToMany
-    @JoinTable(name = "carts",
+    @JoinTable(name = "products",
             joinColumns = {@JoinColumn(name = "product_id", referencedColumnName = "product_id")},
             inverseJoinColumns = {@JoinColumn(name = "cart_id", referencedColumnName = "cart_id")})
     private List<Carts> carts;
@@ -87,6 +91,14 @@ public class Products {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public String getProductImage() {
+        return productImage;
+    }
+
+    public void setProductImage(String productImage) {
+        this.productImage = productImage;
     }
 
 }

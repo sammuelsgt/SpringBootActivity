@@ -34,10 +34,9 @@ public class SecurityConfig {
         http.csrf().disable()
                 .sessionManagement(session -> session.sessionCreationPolicy((SessionCreationPolicy.ALWAYS)))
                 .authorizeHttpRequests((authorize) ->
-                        authorize.requestMatchers("/web/register/**").permitAll()
+                        authorize.requestMatchers("/web/register/**", "/web/login/**").permitAll()
                                 .requestMatchers("/web/**").permitAll()
                                 .requestMatchers("/web/login/**").permitAll()
-
                                 .anyRequest().permitAll()
 
                 ).formLogin(
@@ -60,9 +59,6 @@ public class SecurityConfig {
         auth
                 .userDetailsService(userDetailsService)
                 .passwordEncoder(passwordEncoder());
-
     }
-
-
 
 }

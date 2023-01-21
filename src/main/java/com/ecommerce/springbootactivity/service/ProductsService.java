@@ -1,14 +1,15 @@
 package com.ecommerce.springbootactivity.service;
-
 import com.ecommerce.springbootactivity.dto.ProductsDto;
 import com.ecommerce.springbootactivity.entity.Products;
-import com.ecommerce.springbootactivity.entity.Users;
 import com.ecommerce.springbootactivity.exception.BadRequestException;
 import com.ecommerce.springbootactivity.repository.ProductsRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.web.multipart.MultipartFile;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,31 +23,55 @@ public class ProductsService {
         return productsRepository.findAll();
     }
 
+    public static final String imageDir = "G:\\My Drive\\SpringBootActivity\\target\\classes\\static";
+
+    public String img(MultipartFile file, String imgName) throws IOException {
+        String imgOrigLoc;
+
+        if(!file.isEmpty()) {
+            imgOrigLoc = file.getOriginalFilename();
+            Path fileNameAndPath = Paths.get(imageDir,imgOrigLoc);
+            Files.write(fileNameAndPath, file.getBytes());
+        } else {
+            imgOrigLoc = imgName;
+        }
+
+        return imgOrigLoc;
+    }
+
+    public Products save(ProductsDto productsDto, MultipartFile file, String imgName) throws IOException {
+        Products products = new Products();
+        productsDto.setProductImage(img(file, imgName));
+        products.setProductName(productsDto.getProductName());
+        products.setProductDescription(productsDto.getProductDescription());
+        products.setProductQuantity(productsDto.getProductQuantity());
+        products.setProductPrice((productsDto.getProductPrice()));
+        products.setUserId((productsDto.getUserId()));
+        products.setProductImage(productsDto.getProductImage());
+        return productsRepository.save(products);
+    }
+
+    public Products update(ProductsDto productsDto, MultipartFile file, String imgName) throws IOException {
+        Products products = new Products();
+        productsDto.setProductImage(img(file, imgName));
+        products.setProductName(productsDto.getProductName());
+        products.setProductDescription(productsDto.getProductDescription());
+        products.setProductQuantity(productsDto.getProductQuantity());
+        products.setProductPrice((productsDto.getProductPrice()));
+        products.setUserId((productsDto.getUserId()));
+        products.setProductImage(productsDto.getProductImage());
+        products.setProductId(productsDto.getProductId());
+
+        return productsRepository.save(products);
+    }
+
+
 
     public Products findById(int id) {
         return productsRepository.findById(id).orElseThrow(()-> new BadRequestException("Email cannot be found"));
     }
 
 
-    public void save(ProductsDto productsDto) {
-        Products products = new Products();
-        products.setProductName(productsDto.getProductName());
-        products.setProductDescription(productsDto.getProductDescription());
-        products.setProductQuantity(productsDto.getProductQuantity());
-        products.setProductPrice((productsDto.getProductPrice()));
-        products.setUserId((productsDto.getUserId()));
-        productsRepository.save(products);
-    }
-
-
-    public Products update(int id, Products products) {
-        products.setProductId(id);
-        products.setProductName(products.getProductName());
-        products.setProductDescription(products.getProductDescription());
-        products.setProductQuantity(products.getProductQuantity());
-        products.setProductPrice(products.getProductPrice());
-        return productsRepository.save(products);
-    }
 
     public Products getProductById(int id) {
         Optional<Products> optionalProducts = productsRepository.findById(id);
@@ -60,7 +85,6 @@ public class ProductsService {
         return products;
     }
 
-
     public void deleteProductById(int id) {
         productsRepository.deleteByproductId(id);
     }
@@ -68,6 +92,5 @@ public class ProductsService {
     public List<Products> findAllById(List<Integer> ids) {
         return productsRepository.findAllById(ids);
     }
-
 
 }

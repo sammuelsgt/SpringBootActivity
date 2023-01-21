@@ -3,14 +3,19 @@ package com.ecommerce.springbootactivity.dto;
 public class ProductsDto {
 
     private int productId;
-
-
     private String productName;
     private String productDescription;
     private int productQuantity;
-
     private double productPrice;
+    private String productImage;
 
+    public String getProductImage() {
+        return productImage;
+    }
+
+    public void setProductImage(String productImage) {
+        this.productImage = productImage;
+    }
     private int userId;
     public int getProductId() {
         return productId;

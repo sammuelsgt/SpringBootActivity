@@ -9,8 +9,6 @@ import java.util.List;
 @Table(name = "roles")
 public class Role {
 
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="role_id")
@@ -18,9 +16,6 @@ public class Role {
 
     @Column(name="rolename")
     private String roleName;
-
-//    @ManyToMany(mappedBy="roles")
-//    private List<Users> users;
 
     public int getRoleId() {
         return roleId;
@@ -37,12 +32,5 @@ public class Role {
     public void setRoleName(String roleName) {
         this.roleName = roleName;
     }
-//
-//    public List<Users> getUsers() {
-//        return users;
-//    }
-//
-//    public void setUsers(List<Users> users) {
-//        this.users = users;
-//    }
+
 }

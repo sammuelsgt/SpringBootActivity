@@ -26,7 +26,7 @@ public class UsersController {
     @GetMapping("/home")
     public String homePage(@CurrentSecurityContext(expression="authentication?.name")
                                String email, Model model){
-
+        try {
             if(usersService.findUserByEmail(email).getRoleId() == 1){
                 model.addAttribute("user", usersService.findUserByEmail(email));
                 model.addAttribute("productBuyer" , productsService.findAll());
@@ -35,10 +35,15 @@ public class UsersController {
                 model.addAttribute("user", usersService.findUserByEmail(email));
                 model.addAttribute("product" , productsService.findAll());
                 return "users/homepage";
-
             }
-
             return "users/login";
+
+        }catch (Exception e){
+            return "redirect:/web/login?Please-Log-in";
+        }
+
+
+
     }
     @GetMapping("/login")
     public String login(){

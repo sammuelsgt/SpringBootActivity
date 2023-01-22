@@ -58,8 +58,8 @@ public class ProductsService {
         return productsRepository.save(productsDto);
     }
 
-    public Products getUserProduct(int user_id){
-        Products products = productsRepository.findByUserId(user_id);
+    public List<Products> getUserProduct(int user_id){
+        List<Products> products = productsRepository.findAllByUserId(user_id);
         return products;
     }
 

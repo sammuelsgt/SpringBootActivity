@@ -58,6 +58,11 @@ public class ProductsService {
         return productsRepository.save(productsDto);
     }
 
+    public Products getUserProduct(int user_id){
+        Products products = productsRepository.findByUserId(user_id);
+        return products;
+    }
+
     public Products getProductById(int id) {
         Optional<Products> optionalProducts = productsRepository.findById(id);
         Products products;

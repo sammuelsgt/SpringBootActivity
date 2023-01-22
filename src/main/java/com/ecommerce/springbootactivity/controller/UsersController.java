@@ -33,7 +33,9 @@ public class UsersController {
                 return "users/homepagebuyer";
             } else if (usersService.findUserByEmail(email).getRoleId() == 2) {
                 model.addAttribute("user", usersService.findUserByEmail(email));
-                model.addAttribute("product" , productsService.findAll());
+                model.addAttribute("product" , productsService.getUserProduct(
+                        usersService.findUserByEmail(email).getUserId()
+                ));
                 return "users/homepage";
             }
             return "users/login";

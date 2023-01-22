@@ -26,12 +26,16 @@ public class CartsController {
     @GetMapping("/cartlist")
     public String showCartList(@CurrentSecurityContext(expression="authentication?.name")
                                    String email, Model model) {
+        try {
+            model.addAttribute("carts",
+                    cartsService.findAll(usersService.findUserByEmail(email).getUserId()));
 
+            return "users/carts/carts";
 
-        model.addAttribute("carts",
-                cartsService.findAll(usersService.findUserByEmail(email).getUserId()));
+        }catch (Exception e){
+            return "redirect:/web/login";
+        }
 
-                return "users/carts/carts";
     }
 
     @PostMapping("/add-cart/{product_id}")

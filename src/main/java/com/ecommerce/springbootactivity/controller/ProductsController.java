@@ -5,6 +5,7 @@ import com.ecommerce.springbootactivity.entity.Products;
 import com.ecommerce.springbootactivity.service.ProductsService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
@@ -21,9 +22,14 @@ public class ProductsController {
 
     @GetMapping("/products/{user_id}")
     public String showProductsForm(@PathVariable int user_id, ProductsDto productsDto, Model model) {
-        productsDto.setUserId(user_id);
-        model.addAttribute("product", productsDto);
-        return "users/products/products";
+      try {
+          productsDto.setUserId(user_id);
+          model.addAttribute("product", productsDto);
+          return "users/products/products";
+      }catch (Exception e){
+          return "redirect:/web/login";
+      }
+
     }
     // Add Product
     @PostMapping("/products/save")
